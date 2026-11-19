@@ -57,10 +57,10 @@ docker run -d --name nrzdns \
   ghcr.io/nicorenezweers/nrz-dns:1.14.0
 ```
 
-The image is multi-arch (`linux/amd64`, `linux/arm64`) and is published for every [release](https://github.com/nicorenezweers/nrzDNS/releases). To build it yourself instead (Docker with buildx and `cargo`, which only generates the Dockerfile – everything is compiled inside Docker):
+The image is multi-arch (`linux/amd64`, `linux/arm64`) and is published for every [release](https://github.com/nicorenezweers/nrzNetwork/releases). To build it yourself instead (Docker with buildx and `cargo`, which only generates the Dockerfile – everything is compiled inside Docker):
 
 ```bash
-git clone https://github.com/nicorenezweers/nrzDNS.git
+git clone https://github.com/nicorenezweers/nrzNetwork.git
 cd nrzNetwork
 cargo xtask docker -t nrzdns
 ```
@@ -105,10 +105,10 @@ The container runs as user `1000` without any capabilities. Docker (20.10 and la
 
 ### Without Docker
 
-Every [release](https://github.com/nicorenezweers/nrzDNS/releases) has the program for Linux (`amd64`, `arm64`) as a single file, with `SHA256SUMS`. It brings its own root certificates for DoT, DoH and blocklist downloads.
+Every [release](https://github.com/nicorenezweers/nrzNetwork/releases) has the program for Linux (`amd64`, `arm64`) as a single file, with `SHA256SUMS`. It brings its own root certificates for DoT, DoH and blocklist downloads.
 
 ```bash
-curl -LO https://github.com/nicorenezweers/nrzDNS/releases/download/v1.14.0/nrzdns-1.14.0-linux-amd64
+curl -LO https://github.com/nicorenezweers/nrzNetwork/releases/download/v1.14.0/nrzdns-1.14.0-linux-amd64
 chmod +x nrzdns-1.14.0-linux-amd64
 sudo setcap 'cap_net_bind_service=+ep' nrzdns-1.14.0-linux-amd64   # allow port 53 without root
 NRZDNS_ADDRESS=0.0.0.0 NRZDNS_PORT=8380 NRZDNS_DATA_DIR=./data ./nrzdns-1.14.0-linux-amd64
