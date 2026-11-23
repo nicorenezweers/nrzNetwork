@@ -1,6 +1,6 @@
 [package]
 name = "nrzdns-engine"
-version = "1.14.0"
+version = "1.15.0"
 edition = "2021"
 description = "nrzDNS – DNS-Engine: UDP/TCP-Server, Zonen, Weiterleitung (UDP, TCP, DoT, DoH), Cache, Sperrlisten"
 license = "AGPL-3.0-or-later"

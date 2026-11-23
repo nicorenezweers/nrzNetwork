@@ -1,6 +1,6 @@
 [package]
 name = "nrzdns-types"
-version = "1.14.0"
+version = "1.15.0"
 edition = "2021"
 description = "nrzDNS – gemeinsame Typen der JSON-API (Server, DNS-Engine und Oberfläche)"
 license = "AGPL-3.0-or-later"

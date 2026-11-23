@@ -54,7 +54,7 @@ You need Docker. The image contains the program and the web interface.
 docker run -d --name nrzdns \
   -p 53:53/udp -p 53:53/tcp -p 8380:8380 \
   -v nrzdns-data:/data \
-  ghcr.io/nicorenezweers/nrz-dns:1.14.0
+  ghcr.io/nicorenezweers/nrz-dns:1.15.0
 ```
 
 The image is multi-arch (`linux/amd64`, `linux/arm64`) and is published for every [release](https://github.com/nicorenezweers/nrzNetwork/releases). To build it yourself instead (Docker with buildx and `cargo`, which only generates the Dockerfile – everything is compiled inside Docker):
@@ -74,7 +74,7 @@ Open <http://localhost:8380>. The first account you create becomes the administr
 ```yaml
 services:
   nrzdns:
-    image: ghcr.io/nicorenezweers/nrz-dns:1.14.0   # or: build: .
+    image: ghcr.io/nicorenezweers/nrz-dns:1.15.0   # or: build: .
     container_name: nrzdns
     restart: unless-stopped
     ports:
@@ -108,10 +108,10 @@ The container runs as user `1000` without any capabilities. Docker (20.10 and la
 Every [release](https://github.com/nicorenezweers/nrzNetwork/releases) has the program for Linux (`amd64`, `arm64`) as a single file, with `SHA256SUMS`. It brings its own root certificates for DoT, DoH and blocklist downloads.
 
 ```bash
-curl -LO https://github.com/nicorenezweers/nrzNetwork/releases/download/v1.14.0/nrzdns-1.14.0-linux-amd64
-chmod +x nrzdns-1.14.0-linux-amd64
-sudo setcap 'cap_net_bind_service=+ep' nrzdns-1.14.0-linux-amd64   # allow port 53 without root
-NRZDNS_ADDRESS=0.0.0.0 NRZDNS_PORT=8380 NRZDNS_DATA_DIR=./data ./nrzdns-1.14.0-linux-amd64
+curl -LO https://github.com/nicorenezweers/nrzNetwork/releases/download/v1.15.0/nrzdns-1.15.0-linux-amd64
+chmod +x nrzdns-1.15.0-linux-amd64
+sudo setcap 'cap_net_bind_service=+ep' nrzdns-1.15.0-linux-amd64   # allow port 53 without root
+NRZDNS_ADDRESS=0.0.0.0 NRZDNS_PORT=8380 NRZDNS_DATA_DIR=./data ./nrzdns-1.15.0-linux-amd64
 ```
 
 To try it without touching port 53, let it listen elsewhere, e.g. `NRZDNS_DNS_LISTEN=127.0.0.1:5353`, and ask it with `dig @127.0.0.1 -p 5353 example.com`.
@@ -119,7 +119,7 @@ To try it without touching port 53, let it listen elsewhere, e.g. `NRZDNS_DNS_LI
 ### Both architectures
 
 ```bash
-cargo xtask docker --platform linux/amd64,linux/arm64 -t <registry>/nrz-dns:1.14.0 --push
+cargo xtask docker --platform linux/amd64,linux/arm64 -t <registry>/nrz-dns:1.15.0 --push
 ```
 
 Rust is cross-compiled, not emulated, so the arm64 build is fast on an x86 machine and vice versa. Only the program, gzipped per architecture (for the Umbrel app): `cargo xtask store-binaries <folder>`. Need the Dockerfile as a file (e.g. for `docker compose build`)? `cargo xtask dockerfile > Dockerfile`.

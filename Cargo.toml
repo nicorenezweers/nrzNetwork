@@ -1,6 +1,6 @@
 [package]
 name = "nrzdns"
-version = "1.14.0"
+version = "1.15.0"
 edition = "2021"
 description = "nrzNetwork – selbst gehosteter DNS-Server wie Technitium, in Rust (Rocket, SQLite, Dioxus)"
 license = "AGPL-3.0-or-later"
@@ -20,16 +20,16 @@ nrzdns-types = { path = "types" }
 nrzdns-engine = { path = "engine" }
 
 # Web
-rocket = { version = "=0.5.1", features = ["secrets", "json"] }
-# Rocket 0.5.1 verlangt nur "^0.5.1" für diese beiden – ohne feste Version zieht
-# Cargo 0.5.2 (hyper 1.x), und Rocket 0.5.1 lässt sich nicht mehr übersetzen.
-rocket_http = "=0.5.1"
-rocket_codegen = "=0.5.1"
+rocket = { version = "=0.5.4", features = ["secrets", "json"] }
+# Rocket, rocket_http und rocket_codegen immer auf dieselbe feste Version setzen
+# (0.5.4: hyper 1.x / h2 0.4, behebt GHSA-q83h-524g-xf6h).
+rocket_http = "=0.5.4"
+rocket_codegen = "=0.5.4"
 
 # Datenbank: eine SQLite-Datei (Konten, Einstellungen, Zonen, Listen, Abfrageprotokoll)
 sqlx = { version = "0.9", default-features = false, features = ["runtime-tokio", "sqlite", "macros", "migrate", "json"] }
 
-# Reverse Proxy (HTTP/1.1, dieselbe hyper-Fassung wie Rocket)
+# Reverse Proxy (HTTP/1.1 mit hyper 0.14, ohne HTTP/2 und damit ohne h2)
 hyper = { version = "0.14", features = ["server", "client", "http1", "tcp", "runtime"] }
 
 # Netzwerk-Tools: ICMP über Datagramm-Sockets, HTTP-Check (dieselben Fassungen wie die Engine)
